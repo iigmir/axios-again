@@ -7,7 +7,6 @@ const port = 3000;
 // 流浪到淡水
 app.get("/api",  (req, res) => {
     const authorization = (code) => {
-        console.log(code);
         try {
             console.log(code);
             return jwt_decode(code, { header: true });
@@ -19,6 +18,7 @@ app.get("/api",  (req, res) => {
     const decoded = authorization(req.headers.authorization);
     const code = decoded.signed ? 200 : 401;
     const msg = decoded.signed ? "Authorised" : "Unauthorised";
+    // console.log(decoded);
     if( decoded.throwed ) {
         res.jsonp({ code: 400, error: decoded.error });
         return;
