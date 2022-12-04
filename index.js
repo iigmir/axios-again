@@ -14,10 +14,10 @@ app.get("/api",  (req, res) => {
         }
     };
     const decoded = authorization(req.headers.authorization);
-    const statusCode = decoded.signed ? 200 : 401;
+    const code = decoded.signed ? 200 : 401;
     const msg = decoded.signed ? "Authorised" : "Unauthorised";
-    res.statusCode = statusCode;
-    res.jsonp({ msg });
+    // res.statusCode = statusCode;
+    res.jsonp({ msg, code });
 });
 
 app.get("/api/token", (req, res) => {
