@@ -8,22 +8,18 @@ const port = 3000;
 app.get("/api",  (req, res) => {
     const authorization = (code) => {
         try {
-            console.log(code);
             return jwt_decode(code, { header: false });
         } catch (error) {
-            // console.error(error);
             return { signed: false, throwed: true, error };
         }
     };
     const decoded = authorization(req.headers.authorization);
     const code = decoded.signed ? 200 : 401;
     const msg = decoded.signed ? "Authorised" : "Unauthorised";
-    // console.log(decoded);
     if( decoded.throwed ) {
         res.jsonp({ code: 400, error: decoded.error });
         return;
     }
-    // res.statusCode = statusCode;
     res.jsonp({ msg, code });
 });
 

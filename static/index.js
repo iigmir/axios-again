@@ -39,7 +39,8 @@ ajax.interceptors.response.use( function (response) {
                 url: "/api/token"
             }).then( ({ data }) => {
                 response.config.headers["Authorization"] = `Bearer ${data.token}`;
-                return axios.request(response.config);
+                const new_ajax = axios.request(response.config);
+                new_ajax.then( r => resolve(r.data) ).catch( e => reject(e) );
             }).catch( e => reject(e) );
         });
     } else if (response.data.code !== 200) {
@@ -54,7 +55,7 @@ ajax({
     url: "/api"
 }).then( (r) => {
     console.log(r);
-    // document.getElementById("res").innerText = r;
+    document.getElementById("res").innerText = r.msg;
 }).catch( (e) => {
     console.error(e);
 });
