@@ -1,7 +1,7 @@
 {
   "name": "axios-again",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple demo code about how to use axios refreshing expired token AND resent API.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -9,8 +9,8 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "iigmir",
+  "license": "unlicense",
   "dependencies": {
     "express": "^4.18.2",
     "jwt-decode": "^3.1.2"
