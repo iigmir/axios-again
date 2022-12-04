@@ -9,7 +9,7 @@ app.get("/api",  (req, res) => {
     const authorization = (code) => {
         try {
             console.log(code);
-            return jwt_decode(code, { header: true });
+            return jwt_decode(code, { header: false });
         } catch (error) {
             // console.error(error);
             return { signed: false, throwed: true, error };
