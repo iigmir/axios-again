@@ -1,20 +1,23 @@
 import express from "express";
+import jwt_decode from "jwt-decode";
+
 const app = express();
 const port = 3000;
 
 // 流浪到淡水
 app.get("/api",  (req, res) => {
-    if( req.headers.authorization ) {
-        res.statusCode = 200;
-        res.jsonp({
-            msg: "Authorised"
-        });
-    } else {
-        res.statusCode = 401;
-        res.jsonp({
-            msg: "Unauthorised"
-        });
-    }
+    const authorization = (code) => {
+        try {
+            return jwt_decode(code, { header: true });
+        } catch (error) {
+            return { signed: false, };
+        }
+    };
+    const decoded = authorization(req.headers.authorization);
+    const statusCode = decoded.signed ? 200 : 401;
+    const msg = decoded.signed ? "Authorised" : "Unauthorised";
+    res.statusCode = statusCode;
+    res.jsonp({ msg });
 });
 
 app.get("/api/token", (req, res) => {
