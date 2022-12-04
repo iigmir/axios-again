@@ -8,5 +8,18 @@
 </head>
 <body>
     <h1>Hello Moto</h1>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module">
+    // const ajax = axios.create();
+    // console.log(ajax);
+    axios({
+        method: "GET",
+        url: "/api"
+    }).then( (r) => {
+        console.log(r);
+    }).catch( (e) => {
+        console.log(e);
+    });
+    </script>
 </body>
 </html>
